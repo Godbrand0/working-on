@@ -29,15 +29,15 @@ pwShowHide.forEach (eyeIcon =>{
         })
     })
 })
-signup_link.addEventListener('click', () =>{
-    login.style.display = "none";
-    signup.style.display = "block";
-})
+// signup_link.addEventListener('click', () =>{
+//     login.style.display = "none";
+//     signup.style.display = "block";
+// })
 
-login_link.addEventListener('click', () =>{
-    signup.style.display = "none";
-    login.style.display = "block";
-})
+// login_link.addEventListener('click', () =>{
+//     signup.style.display = "none";
+//     login.style.display = "block";
+// })
 
 
 
@@ -97,18 +97,46 @@ function validate_password() {
     }
 }
 
-btn_done.addEventListener("click", function(){
-    modal_wrapper.classList.add("active");
-})
 
-shadow.addEventListener("click", function(){
-    modal_wrapper.classList.remove("active");
-})
 
-btn.addEventListener("click", function(){
-    modal.classList.add("active");
-})
 
-shad.addEventListener("click", function(){
-    modal.classList.remove("active");
-})
+
+
+const  sign_up = document.querySelector('#signup')
+const profile = document.querySelector('#profile')
+const  username = document.querySelector('#username')
+const  photo = document.querySelector('.head')
+
+
+
+const setupUI = (user) =>{
+    //togge ui
+    if (user) {
+        //account info
+       
+          
+        const html = `
+            <h3 >${user.email}</h3>
+           
+        `;
+        username.innerHTML = html;
+
+        const picture = `
+        <img src="${user.photoURL}" alt="photo">
+           
+        `;
+        photo.innerHTML = html;
+
+        profile.style.display= 'block';
+    
+        sign_up.style.display= 'none';
+    } else {
+
+        username.innerHTML = ''
+        profile.style.display= 'none';
+    
+        sign_up.style.display= 'block';
+    }
+   
+        
+}
