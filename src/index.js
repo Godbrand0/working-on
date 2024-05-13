@@ -6,7 +6,7 @@ import {
 import { initializeApp } from "firebase/app";
 
 import { 
-    getFirestore, collection,getDocs
+    getFirestore, collection,getDocs, doc,setDoc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -55,6 +55,15 @@ come.addEventListener('click', (e) => {
         const user = result.user;
         
         
+        const userEmail = user.email;
+
+        // Create a reference to the user's document in the 'users' collection using the user's UID
+        const docRef = doc(db, 'users', result.user.uid);
+
+        // Set the document data with the user's email
+        setDoc(docRef, {
+            name: userEmail
+        });
         // IdP data available using getAdditionalUserInfo(result)
         // ...
       })

@@ -148,9 +148,7 @@ form{
     cursor: pointer;
     border: none;
 }
-.media-options button:hover{
 
-}
 button.facebook{
     color: #fff;
     background-color: #4267b2;
@@ -216,9 +214,7 @@ img{
     
 }
 h3{
-    font-size: 18px;
-    font-weight: ;
-   
+    font-size: 18px;   
 }
 .text p{
     font-size: 10px;
