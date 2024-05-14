@@ -1,6 +1,7 @@
 import {
     getAuth, GoogleAuthProvider, signInWithRedirect, getRedirectResult, 
-    createUserWithEmailAndPassword, onAuthStateChanged, signOut
+    createUserWithEmailAndPassword, onAuthStateChanged, signOut,
+    signInWithEmailAndPassword
 } from "firebase/auth"
 
 import { initializeApp } from "firebase/app";
@@ -101,6 +102,24 @@ signupForm.addEventListener('submit', (e) =>{
         signupForm.reset();
     })
 })   
+
+
+const loginForm = document.querySelector('#login-form');
+loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const email = signupForm['signup-email'].value;
+    const password = signupForm['signup-password'].value;
+
+    signInWithEmailAndPassword(auth, email, password)
+    .then((cred) => {
+        
+        loginForm.reset()
+    })
+
+  
+
+})
 
 const logout = document.querySelector('.logout');
 

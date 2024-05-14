@@ -102,10 +102,11 @@ function validate_password() {
 
 
 
-const  sign_up = document.querySelector('#signup')
-const profile = document.querySelector('#profile')
-
-const  photo = document.querySelector('.head')
+const  sign_up = document.querySelector('#signup');
+const profile = document.querySelector('#profile');
+const  forgot = document.querySelector('.link');
+const  signin = document.querySelector('#login');
+const  photo = document.querySelector('.head');
 
 
 
@@ -136,3 +137,7 @@ const setupUI = (user) =>{
    
         
 }
+forgot.addEventListener('click', () =>{
+    sign_up.style.display = 'none';
+    signin.style.display = 'block';
+})
