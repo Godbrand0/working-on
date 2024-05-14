@@ -104,7 +104,7 @@ function validate_password() {
 
 const  sign_up = document.querySelector('#signup')
 const profile = document.querySelector('#profile')
-const  username = document.querySelector('#username')
+
 const  photo = document.querySelector('.head')
 
 
@@ -113,26 +113,22 @@ const setupUI = (user) =>{
     //togge ui
     if (user) {
         //account info
-       
-          
-        const html = `
-            <h3 >${user.email}</h3>
-           
-        `;
-        username.innerHTML = html;
-
         const picture = `
-        <img src="${user.photoURL}" alt="photo">
-           
+          <img src="${user.photoURL}" alt="photo">
+          <h3>${user.email}</h3>
+       
         `;
-        photo.innerHTML = html;
+        photo.innerHTML = picture;
+          
+       
+        
 
         profile.style.display= 'block';
     
         sign_up.style.display= 'none';
     } else {
 
-        username.innerHTML = ''
+      
         profile.style.display= 'none';
     
         sign_up.style.display= 'block';

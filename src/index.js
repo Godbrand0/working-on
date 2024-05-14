@@ -39,49 +39,53 @@ onAuthStateChanged(auth, (user) => {
  
 
 
+const comes = document.querySelectorAll('#come');
 
-come.addEventListener('click', (e) => {
-    signInWithRedirect(auth, provider);
-
-
-    getRedirectResult(auth)
-    .then((result) => {
-        // This gives you a Google Access Token. You can use it to access Google APIs.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        
-           
-        // The signed-in user info.
-        const user = result.user;
-        
-        
-        const userEmail = user.email;
-
-        // Create a reference to the user's document in the 'users' collection using the user's UID
-        const docRef = doc(db, 'users', result.user.uid);
-
-        // Set the document data with the user's email
-        setDoc(docRef, {
-            name: userEmail
+comes.forEach (come => {
+    come.addEventListener('click', (e) => {
+        signInWithRedirect(auth, provider);
+    
+    
+        getRedirectResult(auth)
+        .then((result) => {
+            // This gives you a Google Access Token. You can use it to access Google APIs.
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+            
+               
+            // The signed-in user info.
+            const user = result.user;
+            
+            
+            const userEmail = user.email;
+    
+            // // Create a reference to the user's document in the 'users' collection using the user's UID
+            // const docRef = doc(db, 'users', result.uid);
+    
+            // // Set the document data with the user's email
+            // setDoc(docRef, {
+            //     name: userEmail
+            // });
+            // IdP data available using getAdditionalUserInfo(result)
+            // ...
+          })
+          
+          .catch((error) => {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // The email of the user's account used.
+         const email = error.customData.email;
+           // The AuthCredential type that was used.
+            const credential = GoogleAuthProvider.credentialFromError(error);
+            // ...
+    
         });
-        // IdP data available using getAdditionalUserInfo(result)
-        // ...
-      })
-      
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-     const email = error.customData.email;
-       // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
-
+        
+        
     });
     
-    
-});
+})
 
 
 const signupForm = document.querySelector('#signup-form');
