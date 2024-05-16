@@ -105,7 +105,7 @@ function validate_password() {
 const  sign_up = document.querySelector('#signup');
 const profile = document.querySelector('#profile');
 const  forgot = document.querySelector('.link');
-const  signin = document.querySelector('#login');
+const  signin = document.querySelector('#signin');
 const  photo = document.querySelector('.head');
 
 

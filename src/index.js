@@ -76,7 +76,7 @@ comes.forEach (come => {
             const errorCode = error.code;
             const errorMessage = error.message;
             // The email of the user's account used.
-         const email = error.customData.email;
+            const email = error.customData.email;
            // The AuthCredential type that was used.
             const credential = GoogleAuthProvider.credentialFromError(error);
             // ...
@@ -100,6 +100,9 @@ signupForm.addEventListener('submit', (e) =>{
     .then((cred) => {
         console.log('user created:', cred.user)
         signupForm.reset();
+        signupForm.querySelector('.error').innerHTML = '';
+    }).catch(err =>{
+        signupForm.querySelector('.error').innerHTML = err.message;
     })
 })   
 
@@ -108,13 +111,16 @@ const loginForm = document.querySelector('#login-form');
 loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const email = signupForm['signup-email'].value;
-    const password = signupForm['signup-password'].value;
+    const email = loginForm['login-email'].value;
+    const password = loginForm['login-password'].value;
 
     signInWithEmailAndPassword(auth, email, password)
     .then((cred) => {
-        
+        console.log('user entered:', cred.user)
         loginForm.reset()
+        loginForm.querySelector('.error').innerHTML = '';
+    }).catch(err =>{
+        loginForm.querySelector('.error').innerHTML = err.message;
     })
 
   
@@ -129,3 +135,4 @@ logout.addEventListener('click', (e) => {
    
 
 })
+
