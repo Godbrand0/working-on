@@ -136,3 +136,21 @@ logout.addEventListener('click', (e) => {
 
 })
 
+const addBookForm = document.querySelector('.add')
+addBookForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+
+    addDoc(colRef, {
+        Gender: addBookForm.gender.value,
+        Color: addBookForm.color.value,
+        State: addBookForm.state.value,
+        
+    })
+
+    .then(() => {
+        addBookForm.reset()
+    })
+
+})
+
+
