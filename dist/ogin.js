@@ -156,3 +156,45 @@ backButton.addEventListener('click', () =>{
     profile.style.display = 'block';
     editInfo.style.display = 'none';
 });
+
+const userInfo = document.querySelector('#user-info')
+
+const setupGuides = (data) => {
+    let html = '';
+
+    if (data.length) {
+        data.forEach(doc => {
+            const user = doc.data();
+            html += `
+                <tr>
+                    <td>Gender</td>
+                    <td>${user.gender}</td>
+                </tr>
+                <tr>
+                    <td>Color</td>
+                    <td>${user.color}</td>
+                </tr>
+                <tr>
+                    <td>State</td>
+                    <td>${user.state}</td>
+                </tr>
+            `;
+        });
+    } else {
+        html = `
+        <tr>
+         <td>Gender</td>
+         <td>-</td>
+        </tr>
+        <tr>
+         <td>Favorite color</td>
+         <td>-</tdd=>
+        </tr>
+        <tr>
+         <td>State</td>
+         <td>-</td>
+        </tr>`;
+    }
+
+    userInfo.innerHTML = html;
+};

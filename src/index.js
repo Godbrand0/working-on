@@ -7,7 +7,8 @@ import {
 import { initializeApp } from "firebase/app";
 
 import { 
-    getFirestore, collection,getDocs, doc,setDoc,
+    getFirestore, collection,getDocs,
+    addDoc,onSnapshot,doc,setDoc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -29,12 +30,17 @@ const provider = new GoogleAuthProvider();
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        setupUI(user);
+        const colRef = collection(db, 'users');
+        onSnapshot(colRef, snapshot => {    
+            setupGuides(snapshot.docs);
+            setupUI(user);
+        }, err => {
+            console.log(err.message);
+        }); 
     } else {
         setupUI();
+        setupGuides([]);
     }
-}, err => {
-    console.log(err.message);
 });
 
  
@@ -135,6 +141,9 @@ logout.addEventListener('click', (e) => {
    
 
 })
+
+
+const infoTab = document.querySelector('.tab');
 
 // const addBookForm = document.querySelector('.add')
 // addBookForm.addEventListener('submit', (e) => {
