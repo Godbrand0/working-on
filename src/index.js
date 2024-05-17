@@ -96,21 +96,39 @@ comes.forEach (come => {
 
 
 const signupForm = document.querySelector('#signup-form');
+const addInfo = document.querySelector('.add');
+
 signupForm.addEventListener('submit', (e) =>{
     e.preventDefault();
 
     const email = signupForm['signup-email'].value;
     const password = signupForm['signup-password'].value;
+    const gender = addInfo['gender'].value;
+    const color = addInfo['color'].value;
+    const state = addInfo['state'].value;
+
    
     createUserWithEmailAndPassword(auth, email, password)
     .then((cred) => {
-        console.log('user created:', cred.user)
+        const docRef = doc(db, 'users', cred.user.uid);
+        return setDoc(docRef, {
+            gender: gender,
+            color: color,
+            state: state
+        });
+    })
+    .then(() => {
         signupForm.reset();
         signupForm.querySelector('.error').innerHTML = '';
-    }).catch(err =>{
+    })
+    .catch(err =>{
         signupForm.querySelector('.error').innerHTML = err.message;
     })
 })   
+
+
+
+
 
 
 const loginForm = document.querySelector('#login-form');
@@ -142,24 +160,25 @@ logout.addEventListener('click', (e) => {
 
 })
 
+// const gender = addInfo['gender'].value;
+// const color = addInfo['color'].value;
+// const state = addInfo['state'].value;
 
-const infoTab = document.querySelector('.tab');
-
-// const addBookForm = document.querySelector('.add')
-// addBookForm.addEventListener('submit', (e) => {
+// addInfo.addEventListener('submit', (e) => {
 //     e.preventDefault()
 
-//     addDoc(colRef, {
-//         Gender: addBookForm.gender.value,
-//         Color: addBookForm.color.value,
-//         State: addBookForm.state.value,
-        
-//     })
+//     const docRef = doc(db, 'users', cred.user.uid);
 
+//     updateDoc(docRef,{
+//         gender: gender,
+//         color: color,
+//         state: state
+//     })
 //     .then(() => {
-//         addBookForm.reset()
+//         updateForm.reset()
 //     })
 
 // })
+
 
 
