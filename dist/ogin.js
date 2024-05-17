@@ -141,3 +141,18 @@ forgot.addEventListener('click', () =>{
     sign_up.style.display = 'none';
     signin.style.display = 'block';
 })
+
+
+const editButton = document.querySelector('.edit');
+const editInfo = document.querySelector('#edit-info');
+const backButton = document.querySelector('.back');
+
+editButton.addEventListener('click', () =>{
+    profile.style.display = 'none';
+    editInfo.style.display = 'block';
+});
+
+backButton.addEventListener('click', () =>{
+    profile.style.display = 'block';
+    editInfo.style.display = 'none';
+});
