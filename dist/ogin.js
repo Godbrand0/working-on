@@ -157,15 +157,16 @@ backButton.addEventListener('click', () =>{
     editInfo.style.display = 'none';
 });
 
-const userInfo = document.querySelector('#user-info')
 
 const setupGuides = (data) => {
+    var userInfo = document.querySelector('#user-info');
+    userInfo.innerHTML = '';  // Clear previous content
+    
     let html = '';
 
-    if (data.length) {
-        data.forEach(doc => {
-            const user = doc.data();
-            html += `
+    if (data.exists()) {
+        const user = data.data();
+        html += `
             <tr>
                 <td>Gender</td>
                 <td>${user.gender || '-'}</td>
@@ -175,12 +176,13 @@ const setupGuides = (data) => {
                 <td>${user.color || '-'}</td>
             </tr>
             <tr>
-              <td>State</td>
-              <td>${user.state || '-'}</td>
+                <td>State</td>
+                <td>${user.state || '-'}</td>
             </tr>
-            `;
-        });
-    } 
+        `;
+    }
 
     userInfo.innerHTML = html;
 };
+
+

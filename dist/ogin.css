@@ -198,7 +198,7 @@ button .google{
     border-radius: 10px;
     background: #fff;
     width: 400px;
-    height: 280px;
+    height: 250px;
     padding: 10px;
 }
 
@@ -231,6 +231,11 @@ td{
     padding-right: 5px;
 }
 tr :nth-child(1){
+    font-size: 15px;
+    font-weight: bold;
+    color: gray;
+}
+tr :nth-child(2){
     font-size: 15px;
     font-weight: bold;
 }

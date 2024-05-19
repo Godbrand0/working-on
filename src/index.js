@@ -8,7 +8,7 @@ import { initializeApp } from "firebase/app";
 
 import { 
     getFirestore, collection,getDocs,
-    addDoc,onSnapshot,doc,setDoc,
+    addDoc,onSnapshot,doc,setDoc,updateDoc
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -30,9 +30,13 @@ const provider = new GoogleAuthProvider();
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        const colRef = collection(db, 'users');
-        onSnapshot(colRef, snapshot => {    
-            setupGuides(snapshot.docs);
+        const docRef = doc(db, 'users', user.uid);
+        onSnapshot(docRef, docSnapshot => {    
+            if (docSnapshot.exists()) {
+                setupGuides(docSnapshot);
+            } else {
+                setupGuides([]);
+            }
             setupUI(user);
         }, err => {
             console.log(err.message);
@@ -42,7 +46,6 @@ onAuthStateChanged(auth, (user) => {
         setupGuides([]);
     }
 });
-
  
 
 
@@ -140,8 +143,9 @@ loginForm.addEventListener('submit', (e) => {
 
     signInWithEmailAndPassword(auth, email, password)
     .then((cred) => {
-        console.log('user entered:', cred.user)
         loginForm.reset()
+        document.getElementById('profile').style.display = 'block';
+        document.getElementById('signin').style.display = 'none';
         loginForm.querySelector('.error').innerHTML = '';
     }).catch(err =>{
         loginForm.querySelector('.error').innerHTML = err.message;
@@ -160,25 +164,36 @@ logout.addEventListener('click', (e) => {
 
 })
 
-// const gender = addInfo['gender'].value;
-// const color = addInfo['color'].value;
-// const state = addInfo['state'].value;
+const addInfoForm = document.querySelector('.add');
 
-// addInfo.addEventListener('submit', (e) => {
-//     e.preventDefault()
+addInfoForm.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-//     const docRef = doc(db, 'users', cred.user.uid);
+    const gender = addInfoForm['gender'].value;
+    const color = addInfoForm['color'].value;
+    const state = addInfoForm['state'].value;
 
-//     updateDoc(docRef,{
-//         gender: gender,
-//         color: color,
-//         state: state
-//     })
-//     .then(() => {
-//         updateForm.reset()
-//     })
+    onAuthStateChanged(auth, (user) => {
+        
+        if (user) {
+            const docRef = doc(db, 'users', user.uid);
 
-// })
+            updateDoc(docRef, {
+                gender: gender,
+                color: color,
+                state: state
+            })
+            .then(() => {
+                addInfoForm.reset();
+            })
+            .catch((error) => {
+                console.error('Error updating document:', error.message);
+            });
+        } else {
+            console.log('No user is signed in.');
+        }
+    });
+});
 
 
 
