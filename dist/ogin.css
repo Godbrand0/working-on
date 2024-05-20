@@ -198,7 +198,7 @@ button .google{
     border-radius: 10px;
     background: #fff;
     width: 400px;
-    height: 250px;
+    height: 280px;
     padding: 10px;
 }
 
@@ -221,6 +221,7 @@ h3{
 
 .tab{
     margin-top: 20px;
+    margin-bottom: 40px;
 }
 table{
     width: 100%;
@@ -230,14 +231,17 @@ td{
     height: 25px;
     padding-right: 5px;
 }
+
 tr :nth-child(1){
     font-size: 15px;
     font-weight: bold;
     color: gray;
+    padding-top: 15px;
 }
 tr :nth-child(2){
     font-size: 15px;
     font-weight: bold;
+    text-transform: capitalize;
 }
 
 .edit{

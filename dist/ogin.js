@@ -185,4 +185,28 @@ const setupGuides = (data) => {
     userInfo.innerHTML = html;
 };
 
+// const setupGuides = (docs) => {
+//     const userInfo = document.querySelector('#user-info');
+//     userInfo.innerHTML = '';  // Clear previous content
+
+//     if (docs.length > 0) {
+//         docs.forEach((doc) => {
+//             const user = doc.data();
+//             userInfo.innerHTML += `
+//                 <tr>
+//                     <td>Gender</td>
+//                     <td>${user.gender || '-'}</td>
+//                 </tr>
+//                 <tr>
+//                     <td>Favorite color</td>
+//                     <td>${user.color || '-'}</td>
+//                 </tr>
+//                 <tr>
+//                     <td>State</td>
+//                     <td>${user.state || '-'}</td>
+//                 </tr>
+//             `;
+//         });
+//     } 
+// };
 
