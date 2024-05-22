@@ -24,7 +24,6 @@ initializeApp(firebaseConfig)
 
 const db = getFirestore()
 const auth = getAuth();
-const colRef = collection(db, 'users')
 const provider = new GoogleAuthProvider();
 
 
@@ -65,17 +64,24 @@ comes.forEach (come => {
                
             // The signed-in user info.
             const user = result.user;
-            
-            
+            const docRef = doc(db, 'users', user.uid);
+
+                getDoc(docRef).then((docSnapshot) => {
+                    if (!docSnapshot.exists()) {
+                        // Create user document if it doesn't exist
+                        setDoc(docRef, {
+                            gender: '',
+                            color: '',
+                            state: ''
+                        });
+                    }
+                });
             const userEmail = user.email;
     
             // // Create a reference to the user's document in the 'users' collection using the user's UID
             // const docRef = doc(db, 'users', result.uid);
     
-            // // Set the document data with the user's email
-            // setDoc(docRef, {
-            //     name: userEmail
-            // });
+           
             // IdP data available using getAdditionalUserInfo(result)
             // ...
           })
@@ -97,12 +103,26 @@ comes.forEach (come => {
     
 })
 
+const signupLoader = document.querySelector('#signup-loader');
+const loginLoader = document.querySelector('#login-loader');
+
+ // Show loader
+ const showLoader = (loader) => {
+    loader.style.visibility = 'visible';
+};
+
+// Hide loader
+const hideLoader = (loader) => {
+    loader.style.visibility = 'hidden';
+};
 
 const signupForm = document.querySelector('#signup-form');
 const addInfo = document.querySelector('.add');
 
 signupForm.addEventListener('submit', (e) =>{
     e.preventDefault();
+    showLoader(signupLoader);
+
 
     const email = signupForm['signup-email'].value;
     const password = signupForm['signup-password'].value;
@@ -123,9 +143,11 @@ signupForm.addEventListener('submit', (e) =>{
     .then(() => {
         signupForm.reset();
         signupForm.querySelector('.error').innerHTML = '';
+        hideLoader(signupLoader);
     })
     .catch(err =>{
         signupForm.querySelector('.error').innerHTML = err.message;
+        hideLoader(signupLoader);
     })
 })   
 
@@ -137,6 +159,7 @@ signupForm.addEventListener('submit', (e) =>{
 const loginForm = document.querySelector('#login-form');
 loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
+    showLoader(loginLoader);
 
     const email = loginForm['login-email'].value;
     const password = loginForm['login-password'].value;
@@ -147,8 +170,10 @@ loginForm.addEventListener('submit', (e) => {
         document.getElementById('profile').style.display = 'block';
         document.getElementById('signin').style.display = 'none';
         loginForm.querySelector('.error').innerHTML = '';
+        hideLoader(loginLoader);
     }).catch(err =>{
         loginForm.querySelector('.error').innerHTML = err.message;
+        hideLoader(loginLoader);
     })
 
   

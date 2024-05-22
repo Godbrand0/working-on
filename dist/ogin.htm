@@ -32,7 +32,7 @@
                     </div>
 
                     
-                    <button class="field button">Signup</button>
+                    <button class="field button">Signup <span class="loader" id="signup-loader"></span></button>
                     <p class="error"></p>
                    
                 </form>
@@ -134,7 +134,7 @@
     <section class="container forms" style="display: none;" id="signin">
         <div class="form login" >
             <div class="form-content">
-                <header>Login in</header>
+                <header>Login</header>
                 <form id="login-form" >
                     <div class="field input-field">
                         <input type="email" placeholder="Email" class="input" id="login-email">
@@ -147,10 +147,12 @@
                         </svg>
                     </div>
 
-                   
+                    <div class="form-link">
+                        <span>Don't have an account? <a href="#" class="lik login_link">Signup</a></span>
+                    </div>
 
                     
-                    <button class="field button">Login</button>
+                    <button class="field button">Login <span class="loader" id="login-loader"></span></button>
                     <p class="error"></p>
                    
                 </form>

@@ -105,6 +105,7 @@ function validate_password() {
 const  sign_up = document.querySelector('#signup');
 const profile = document.querySelector('#profile');
 const  forgot = document.querySelector('.link');
+const  signed = document.querySelector('.lik');
 const  signin = document.querySelector('#signin');
 const  photo = document.querySelector('.head');
 
@@ -142,6 +143,11 @@ forgot.addEventListener('click', () =>{
     signin.style.display = 'block';
 })
 
+signed.addEventListener('click', () =>{
+    sign_up.style.display = 'block';
+    signin.style.display = 'none';
+})
+
 
 const editButton = document.querySelector('.edit');
 const editInfo = document.querySelector('#edit-info');
@@ -158,15 +164,15 @@ backButton.addEventListener('click', () =>{
 });
 
 
-const setupGuides = (data) => {
-    var userInfo = document.querySelector('#user-info');
+const setupGuides = (doc) => {
+    const userInfo = document.querySelector('#user-info');
     userInfo.innerHTML = '';  // Clear previous content
     
     let html = '';
 
-    if (data.exists()) {
-        const user = data.data();
-        html += `
+    if (doc.exists()) {
+        const user = doc.data();
+        html = `
             <tr>
                 <td>Gender</td>
                 <td>${user.gender || '-'}</td>
@@ -184,29 +190,3 @@ const setupGuides = (data) => {
 
     userInfo.innerHTML = html;
 };
-
-// const setupGuides = (docs) => {
-//     const userInfo = document.querySelector('#user-info');
-//     userInfo.innerHTML = '';  // Clear previous content
-
-//     if (docs.length > 0) {
-//         docs.forEach((doc) => {
-//             const user = doc.data();
-//             userInfo.innerHTML += `
-//                 <tr>
-//                     <td>Gender</td>
-//                     <td>${user.gender || '-'}</td>
-//                 </tr>
-//                 <tr>
-//                     <td>Favorite color</td>
-//                     <td>${user.color || '-'}</td>
-//                 </tr>
-//                 <tr>
-//                     <td>State</td>
-//                     <td>${user.state || '-'}</td>
-//                 </tr>
-//             `;
-//         });
-//     } 
-// };
-
