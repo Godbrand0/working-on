@@ -161,6 +161,9 @@ editButton.addEventListener('click', () =>{
 backButton.addEventListener('click', () =>{
     profile.style.display = 'block';
     editInfo.style.display = 'none';
+    sign_up.style.display = 'none';
+    signin.style.display = 'none';
+
 });
 
 
